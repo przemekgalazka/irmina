@@ -3,5 +3,18 @@ language: java
 jdk:
   - oraclejdk7
 after_success:
-  - echo "<settings><servers><server><id>ossrh</id><username>\${env.OSSRH_USER}</username><password>\${env.OSSRH_PASS}</password></server></servers></settings>" > ~/settings.xml
+  - echo "<settings><servers><server><id>ossrh</id><username>\${env.OSSRH_USER}</username><password>\${env.OSSRH_PASS}</password></server></servers>
+  <profiles>
+       <id>ossrh</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <gpg.executable>gpg</gpg.executable>
+        <gpg.passphrase>\${env.GPG_PASS}</gpg.passphrase>
+      </properties>
+    </profile>
+
+  </profiles>
+  </settings>" > ~/settings.xml
   - mvn deploy -Prelease --settings ~/settings.xml
