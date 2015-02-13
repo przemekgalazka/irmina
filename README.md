@@ -6,7 +6,7 @@ Irmina is Spring integration tests runner
 ```java
 @RunWith(IrminaRunner.class)
 ```
-Irmina mock all your new dependencies if needed. Also adds extra behavior to your mocks when needed while spring context bootstraps
+Irmina mocks all your new, not provided dependencies. Also adds extra behavior to your mocks when needed while spring context bootstraps
 ```
 define(SuspensionDesign.class).named("AudiA4")
                     .asMockWithBehavior(new Behavior<SuspensionDesign>() {
