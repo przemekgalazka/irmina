@@ -1,14 +1,13 @@
-# Irmina
 This README for test tool that support your spring integration tests
 
 ## What is it?
 
-### Irmina is Spring integration tests runner
+Irmina is Spring integration tests runner
 ```java
 @RunWith(IrminaRunner.class)
 ```
-### Irmina mock all your new dependencies if needed
-### Irmina adds extra behavior to your mocks when needed while spring context bootstrap
+Irmina mock all your new dependencies if needed
+Irmina adds extra behavior to your mocks when needed while spring context bootstrap
 ```
 define(SuspensionDesign.class).named("AudiA4")
                     .asMockWithBehavior(new Behavior<SuspensionDesign>() {
@@ -18,15 +17,15 @@ define(SuspensionDesign.class).named("AudiA4")
                         }
                     });
 ```
-### Irmina let you decide if you need mock, spy or implementation at certain injection point
+Irmina let you decide if you need mock, spy or implementation at certain injection point
 ```java
 define(Engine.class).named("AudiA4-engine").asMock();
 ```
-### Irmina will mock out all dependencies you did not included in configuration but are needed (like DAO layer or DataSource)
+Irmina will mock out all dependencies you did not included in configuration but are needed (like DAO layer or DataSource)
 
 ## Examples
 
-### Irmina mock all not provieded injection points definitons
+Irmina mock all not provieded injection points definitons
 ```java
 @ContextConfiguration(classes = SampleConfiguration.class)
 @TestExecutionListeners(IrminaTestContextListener.class)
@@ -41,30 +40,27 @@ public class MockInjectionTest {
     @Named("Mustang")
     Vehicle mustang;
 
+    // this is not defined in configuration - mock will be injected
     @Inject
     @Named("V6")
-    Engine mustangEngine;  // this is not defined in configuration - mock will be injected
+    Engine mustangEngine;  
 
     @Test
     public void shouldInjectBmwX5() {
-
         //expect
         assertThat(bmw).isInstanceOf(BmwX5.class);
-
     }
 
     @Test
     public void shouldInjectMockEngineForFordMustang() {
-
         // when
         mustang.start();
-
         //expect
         verify(mustangEngine).turnOn();
     }
 }
 ```
-### Irmina mock or spy what you want - any injection point 
+### Irmina will mock or spy what you want - any injection point 
 ```java
 @ContextConfiguration(classes = SampleConfiguration.class,
         loader = MockingOutStandardInjectionPointsTest.ContextLoader.class)
@@ -82,20 +78,17 @@ public class MockingOutStandardInjectionPointsTest {
 
     @Test
     public void shouldInjectMockEngineForFordBmw() {
-
         // when
         bmw.start();
-
         //expect
         verify(bwmEngine).turnOn();
     }
 
     static class ContextLoader extends IrminaContextLoader {
-
         @Override
         public void defineMocksAndSpies() {
-
-            define(Engine.class).annotated(Bmw.class).asMock();  // this will be injected as mock eventhoug its implementation is available in configuration
+            // this will be injected as mock eventhoug its implementation is available in configuration
+            define(Engine.class).annotated(Bmw.class).asMock();  
         }
     }
 }
@@ -112,14 +105,14 @@ public class MockingOutStandardInjectionPointsTest {
 ```
 
 ## Usage 
-### Add configuration to your test
+Add configuration to your test
 ```java
 @ContextConfiguration(classes = SampleConfiguration.class,
         loader = MockingOutStandardInjectionPointsTest.ContextLoader.class)
 @TestExecutionListeners(IrminaTestContextListener.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 ```
-### Setup mock if needed
+Setup mock if needed
 ```java
    static class ContextLoader extends IrminaContextLoader {
 
@@ -130,7 +123,7 @@ public class MockingOutStandardInjectionPointsTest {
         }
     }
 ```
-## Use mockito annotations on fields if you want
+Use mockito annotations on fields if you want
 ``` java
 @ContextConfiguration(classes = SampleConfiguration.class,
         loader = MockingOutNamedBeansButWithScanningForMockTest.ContextLoader.class)
@@ -146,10 +139,8 @@ public class MockingOutNamedBeansButWithScanningForMockTest {
 
     @Test
     public void shouldInjectMockEngineForAudi() {
-
         // when
         audi.start();
-
         //expect
         verify(audiEngine).turnOn();
     }
