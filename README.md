@@ -6,7 +6,7 @@ Irmina is Spring integration tests runner
 ```java
 @RunWith(IrminaRunner.class)
 ```
-Irmina mock all your new dependencies if needed. Also adds extra behavior to your mocks when needed while spring context bootstrap
+Irmina mock all your new dependencies if needed. Also adds extra behavior to your mocks when needed while spring context bootstraps
 ```
 define(SuspensionDesign.class).named("AudiA4")
                     .asMockWithBehavior(new Behavior<SuspensionDesign>() {
@@ -16,7 +16,7 @@ define(SuspensionDesign.class).named("AudiA4")
                         }
                     });
 ```
-Irmina let you decide if you need mock, spy or implementation at certain injection point
+Irmina lets you decide if you need mock, spy or implementation at certain injection point
 ```java
 define(Engine.class).named("AudiA4-engine").asMock();
 ```
@@ -24,7 +24,7 @@ Irmina will mock out all dependencies you did not included in configuration but 
 
 ## Examples
 
-Irmina mock out not provieded injection points definitons
+Irmina mocks out not provieded injection points definitons
 ```java
 @ContextConfiguration(classes = SampleConfiguration.class)
 @TestExecutionListeners(IrminaTestContextListener.class)
@@ -70,7 +70,8 @@ public class MockingOutStandardInjectionPointsTest {
     @Inject
     @Bmw
     Vehicle bmw;
-
+     
+    // this is defined in configuration but mock will be injected 
     @Inject
     @Bmw
     Engine bwmEngine;
@@ -118,7 +119,7 @@ Setup mock if needed
         @Override
         public void defineMocksAndSpies() {
 
-            define(Engine.class).annotated(Bmw.class).asMock();  // this will be injected as mock eventhoug its implementation is available in configuration
+            define(Engine.class).annotated(Bmw.class).asMock();  // this will be injected as mock even though its implementation is available in configuration
         }
     }
 ```
