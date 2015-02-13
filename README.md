@@ -59,7 +59,7 @@ public class MockInjectionTest {
     }
 }
 ```
-### Irmina will mock or spy what you want - any injection point 
+Irmina will mock or spy what you want - any injection point 
 ```java
 @ContextConfiguration(classes = SampleConfiguration.class,
         loader = MockingOutStandardInjectionPointsTest.ContextLoader.class)
@@ -93,36 +93,6 @@ public class MockingOutStandardInjectionPointsTest {
     }
 }
 ```
-
-## Maven dependency
-```xml
-        <dependency>
-            <groupId>com.geodevv.testing</groupId>
-            <artifactId>irmina</artifactId>
-            <version>1.0.0</version>
-            <scope>test</scope>
-        </dependency>
-```
-
-## Usage 
-Add configuration to your test
-```java
-@ContextConfiguration(classes = SampleConfiguration.class,
-        loader = MockingOutStandardInjectionPointsTest.ContextLoader.class)
-@TestExecutionListeners(IrminaTestContextListener.class)
-@RunWith(SpringJUnit4ClassRunner.class)
-```
-Setup mock if needed
-```java
-   static class ContextLoader extends IrminaContextLoader {
-
-        @Override
-        public void defineMocksAndSpies() {
-
-            define(Engine.class).annotated(Bmw.class).asMock();  // this will be injected as mock even though its implementation is available in configuration
-        }
-    }
-```
 Use mockito annotations on fields if you want
 ``` java
 @ContextConfiguration(classes = SampleConfiguration.class,
@@ -154,6 +124,37 @@ public class MockingOutNamedBeansButWithScanningForMockTest {
 
 }
 ```
+
+## Maven dependency
+```xml
+        <dependency>
+            <groupId>com.geodevv.testing</groupId>
+            <artifactId>irmina</artifactId>
+            <version>1.0.0</version>
+            <scope>test</scope>
+        </dependency>
+```
+
+## Usage 
+Add configuration to your test
+```java
+@ContextConfiguration(classes = SampleConfiguration.class,
+        loader = MockingOutStandardInjectionPointsTest.ContextLoader.class)
+@TestExecutionListeners(IrminaTestContextListener.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+```
+Setup mock if needed
+```java
+   static class ContextLoader extends IrminaContextLoader {
+
+        @Override
+        public void defineMocksAndSpies() {
+
+            define(Engine.class).annotated(Bmw.class).asMock();  // this will be injected as mock even though its implementation is available in configuration
+        }
+    }
+```
+
 
 ##Dependencies
 * Spring 3.2.12.RELEASE
