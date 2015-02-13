@@ -1,5 +1,3 @@
-This README for test tool that support your spring integration tests
-
 ## What is it?
 
 Irmina is Spring integration tests runner
