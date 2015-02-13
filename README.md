@@ -138,10 +138,10 @@ public class MockingOutNamedBeansButWithScanningForMockTest {
 ## Usage 
 Add configuration to your test
 ```java
-@ContextConfiguration(classes = SampleConfiguration.class,
-        loader = MockingOutStandardInjectionPointsTest.ContextLoader.class)
+@ContextConfiguration(classes = {your spring configuration}.class,
+        loader = {your test class name}.ContextLoader.class)
 @TestExecutionListeners(IrminaTestContextListener.class)
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(IrminaRunner.class)
 ```
 Setup mock if needed
 ```java
@@ -149,10 +149,24 @@ Setup mock if needed
 
         @Override
         public void defineMocksAndSpies() {
-
-            define(Engine.class).annotated(Bmw.class).asMock();  // this will be injected as mock even though its implementation is available in configuration
+            // this will be injected as mock even though its implementation is available in configuration
+            define(Engine.class).annotated(Bmw.class).asMock(); 
         }
     }
+```
+or with using @Mock 
+```java
+...
+@Inject @Mock
+@Named("AudiA4-engine") Engine audiEngine;
+...
+static class ContextLoader extends IrminaContextLoader {
+        @Override
+        public void defineMocksAndSpies() {
+            registerSpiesAndMockByScanningTestClass(MockingOutNamedBeansButWithScanningForMockTest.class);
+        }
+}
+...
 ```
 
 
