@@ -85,7 +85,7 @@ public class MockingOutStandardInjectionPointsTest {
     static class ContextLoader extends IrminaContextLoader {
         @Override
         public void defineMocksAndSpies() {
-            // this will be injected as mock eventhoug its implementation is available in configuration
+            // this will be injected as mock even though its implementation is available in configuration
             define(Engine.class).annotated(Bmw.class).asMock();  
         }
     }
