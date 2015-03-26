@@ -18,6 +18,6 @@ package com.geodevv.testing.irmina;
 
 public interface Behavior<T> {
 
-    void teach(T bean);
+    void teach(T bean) throws Exception;
 
 }
