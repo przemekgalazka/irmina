@@ -62,8 +62,12 @@ public class InjectionPointDefinitionRegistrationProxy {
     }
 
     public void asMockWithBehavior(Behavior behavior) {
-        context.getBean(MockedInjectionPointsRegister.class)
-                .registerMockWithBehavior(new InjectionPointDefinition(annotations, type), behavior);
+        try {
+            context.getBean(MockedInjectionPointsRegister.class)
+                    .registerMockWithBehavior(new InjectionPointDefinition(annotations, type), behavior);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void asSpy() {

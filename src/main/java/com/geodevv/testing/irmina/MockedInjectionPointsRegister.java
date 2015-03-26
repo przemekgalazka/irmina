@@ -56,7 +56,7 @@ public class MockedInjectionPointsRegister {
 
     }
 
-    public Object registerMockWithBehavior(InjectionPointDefinition definition, Behavior behavior) {
+    public Object registerMockWithBehavior(InjectionPointDefinition definition, Behavior behavior) throws Exception {
         Object mock = registerMock(definition);
         behavior.teach(mock);
         return mock;
