@@ -9,7 +9,7 @@ Irmina mocks all your new, not provided dependencies. Also adds extra behavior t
 define(SuspensionDesign.class).named("AudiA4")
                     .asMockWithBehavior(new Behavior<SuspensionDesign>() {
                         @Override
-                        public void teach(SuspensionDesign bean) {
+                        public void teach(SuspensionDesign bean) throws Exception {
                             given(bean.getVersion()).willReturn("v2");
                         }
                     });
@@ -128,7 +128,7 @@ public class MockingOutNamedBeansButWithScanningForMockTest {
         <dependency>
             <groupId>com.geodevv.testing</groupId>
             <artifactId>irmina</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
             <scope>test</scope>
         </dependency>
 ```
@@ -174,6 +174,6 @@ static class ContextLoader extends IrminaContextLoader {
 
 
 ##Latest Release
-* 1.0.0
+* 1.0.1
 
 
