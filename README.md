@@ -128,7 +128,7 @@ public class MockingOutNamedBeansButWithScanningForMockTest {
         <dependency>
             <groupId>com.geodevv.testing</groupId>
             <artifactId>irmina</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
             <scope>test</scope>
         </dependency>
 ```
@@ -174,6 +174,6 @@ static class ContextLoader extends IrminaContextLoader {
 
 
 ##Latest Release
-* 1.0.1
+* 1.0.2
 
 
